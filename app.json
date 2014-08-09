@@ -3,5 +3,9 @@
   "description": "A sample Wombat endpoint written in Go",
   "repository": "https://github.com/buccolo/gopher_endpoint",
   "logo": "http://tour.golang.org/static/gopher.png",
-  "keywords": ["go", "wombat", "spree"]
+  "keywords": ["go", "wombat", "spree"],
+  "success_url": "/",
+  "env": {
+        "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go.git"
+    }
 }
