@@ -1,0 +1,5 @@
+{
+	"ImportPath": "github.com/buccolo/gopher_endpoint",
+	"GoVersion": "go1.3",
+	"Deps": []
+}
