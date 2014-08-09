@@ -48,18 +48,20 @@ func extractRequestId(r *http.Request) string {
 	}
 }
 
+func buildGophers() []Gopher {
+	return []Gopher{
+		{Id: rand.Int()}, {Id: rand.Int()}}
+}
+
 func Root(w http.ResponseWriter, r *http.Request) {
 	var requestId = extractRequestId(r)
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	gophers := []Gopher{
-		{Id: rand.Int()}, {Id: rand.Int()}}
-
 	rootResponse := &WombatResponse{
 		RequestId: requestId,
-		Gophers:   gophers}
+		Gophers:   buildGophers()}
 
 	response, _ := json.Marshal(rootResponse)
 	io.WriteString(w, string(response))
