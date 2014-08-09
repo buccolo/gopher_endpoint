@@ -1,4 +1,4 @@
-# Gopher Endpoint
+# Gopher Endpoint [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/buccolo/gopher_endpoint)
 
 A [Wombat](https://wombat.co) endpoint that retruns gophers.
 
