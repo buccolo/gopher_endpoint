@@ -1,6 +1,6 @@
 # Gopher Endpoint
 
-A [Wombat](wombat.co) endpoint that retruns gophers.
+A [Wombat](https://wombat.co) endpoint that retruns gophers.
 
 ### Start the endpoint
 
