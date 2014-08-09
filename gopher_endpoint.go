@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -27,7 +28,8 @@ func main() {
 
 	http.HandleFunc("/", Root)
 
-	err := http.ListenAndServe(":9292", nil)
+	var port = os.Getenv("PORT")
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
