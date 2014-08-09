@@ -24,11 +24,11 @@ func init() {
 }
 
 func main() {
-	log.Printf("Starting gopher_endpoint...")
+	var port = os.Getenv("PORT")
+	log.Printf("Starting gopher_endpoint on port %s...", port)
 
 	http.HandleFunc("/", Root)
 
-	var port = os.Getenv("PORT")
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
@@ -56,8 +56,8 @@ func buildGophers() []Gopher {
 func Root(w http.ResponseWriter, r *http.Request) {
 	var requestId = extractRequestId(r)
 
-	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 
 	rootResponse := &WombatResponse{
 		RequestId: requestId,
