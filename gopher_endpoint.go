@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
+	"time"
 )
 
 type WombatResponse struct {
@@ -14,6 +16,10 @@ type WombatResponse struct {
 
 type Gopher struct {
 	Id int `json:"id"`
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
 }
 
 func main() {
@@ -28,26 +34,26 @@ func main() {
 }
 
 func extractRequestId(r *http.Request) string {
-  defer r.Body.Close()
+	defer r.Body.Close()
 
-  decoder := json.NewDecoder(r.Body)
-  var json map[string]interface{}
-  var err = decoder.Decode(&json)
-  if err != nil {
-    return "1234"
-  } else {
-    return json["request_id"].(string)
-  }
+	decoder := json.NewDecoder(r.Body)
+	var json map[string]interface{}
+	var err = decoder.Decode(&json)
+	if err != nil {
+		return "not provided"
+	} else {
+		return json["request_id"].(string)
+	}
 }
 
 func Root(w http.ResponseWriter, r *http.Request) {
-  var requestId = extractRequestId(r)
+	var requestId = extractRequestId(r)
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
 	gophers := []Gopher{
-		{Id: 123}, {Id: 456}}
+		{Id: rand.Int()}, {Id: rand.Int()}}
 
 	rootResponse := &WombatResponse{
 		RequestId: requestId,
@@ -56,5 +62,5 @@ func Root(w http.ResponseWriter, r *http.Request) {
 	response, _ := json.Marshal(rootResponse)
 	io.WriteString(w, string(response))
 
-  log.Printf("RequestId: %s\tPath: /", requestId)
+	log.Printf("RequestId: %s\tPath: /", requestId)
 }
